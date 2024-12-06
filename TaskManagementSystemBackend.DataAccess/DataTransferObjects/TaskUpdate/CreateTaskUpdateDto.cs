@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects
+namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.TaskUpdate
 {
     public class CreateTaskUpdateDto
     {

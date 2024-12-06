@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects
+﻿using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
+
+namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization
 {
     public class OrganizationDto
     {

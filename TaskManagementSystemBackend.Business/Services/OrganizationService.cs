@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystemBackend.DataAccess;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.OrganizationRole;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
 using TaskManagementSystemBackend.DataAccess.Entities;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
@@ -111,6 +113,7 @@ namespace TaskManagementSystemBackend.Business.Services
                 foreach (var user in userOrganizations)
                 {
                     var userEntity = await _context.Users.FindAsync(user.UserId);
+                    if (userEntity == null) continue;
                     users.Add(userEntity);
                 }
 
@@ -119,6 +122,88 @@ namespace TaskManagementSystemBackend.Business.Services
             catch (Exception ex)
             {
                 throw new Exception($"Kullanıcılar alınırken bir hata oluştu: {ex.Message}");
+            }
+        }
+
+        public async Task<UserDto> GetOwnerByOrganizationIdAsync(int organizationId)
+        {
+            try
+            {
+                var organization = await _context.Organizations.FindAsync(organizationId);
+                if (organization == null) throw new Exception("Organizasyon bulunamadı");
+
+                var owner = await _context.Users.FindAsync(organization.OwnerId);
+                if (owner == null) throw new Exception("Organizasyon sahibi bulunamadı");
+
+                return _mapper.Map<UserDto>(owner);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Organizasyon sahibi alınırken bir hata oluştu: {ex.Message}");
+            }
+        }
+
+        public async Task<OrganizationRoleDto> GetOrganizationRolesByOrganizationIdAsync(int organizationId)
+        {
+            try
+            {
+                var roles = await _context.OrganizationRoles
+                    .Where(or => or.OrganizationId == organizationId)
+                    .ToListAsync();
+
+                return _mapper.Map<OrganizationRoleDto>(roles);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Organizasyona ait roller alınırken bir hata oluştu: {ex.Message}");
+            }
+        }
+
+        public async Task AddUserToOrganizationAsync(int organizationId, int userId)
+        {
+            try
+            {
+                var organization = await _context.Organizations.FindAsync(organizationId);
+                if (organization == null) throw new Exception("Organizasyon bulunamadı");
+
+                var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
+                if (!userExists) throw new Exception("Kullanıcı bulunamadı");
+
+                var userOrganizationExists = await _context.UserOrganizations
+                    .AnyAsync(uo => uo.OrganizationId == organizationId && uo.UserId == userId);
+
+                if (userOrganizationExists) throw new Exception("Kullanıcı zaten organizasyona eklenmiş");
+
+                var userOrganization = new UserOrganization
+                {
+                    OrganizationId = organizationId,
+                    UserId = userId
+                };
+
+                await _context.UserOrganizations.AddAsync(userOrganization);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Kullanıcı organizasyona eklenirken bir hata oluştu: {ex.Message}");
+            }
+        }
+
+        public async Task RemoveUserFromOrganizationAsync(int organizationId, int userId)
+        {
+            try
+            {
+                var userOrganization = await _context.UserOrganizations
+                    .FirstOrDefaultAsync(uo => uo.OrganizationId == organizationId && uo.UserId == userId);
+
+                if (userOrganization == null) throw new Exception("Kullanıcı organizasyonda bulunamadı");
+
+                _context.UserOrganizations.Remove(userOrganization);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Kullanıcı organizasyondan çıkarılırken bir hata oluştu: {ex.Message}");
             }
         }
     }

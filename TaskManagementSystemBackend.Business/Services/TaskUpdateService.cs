@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystemBackend.DataAccess;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.TaskUpdate;
 using TaskManagementSystemBackend.DataAccess.Entities;
 using TaskManagementSystemBackend.DataAccess.IServices;
 

@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Task;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.TaskUpdate;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Token;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
 using TaskManagementSystemBackend.DataAccess.Entities;
 
 namespace TaskManagementSystemBackend.Business.Mapping

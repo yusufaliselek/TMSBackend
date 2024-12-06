@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects
+﻿namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.TaskUpdate
 {
     public class TaskUpdateDto
     {

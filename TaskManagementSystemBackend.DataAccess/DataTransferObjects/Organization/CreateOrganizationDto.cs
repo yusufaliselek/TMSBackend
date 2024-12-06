@@ -1,6 +1,6 @@
-﻿namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects
+﻿namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization
 {
-    public class UpdateOrganizationDto
+    public class CreateOrganizationDto
     {
         public string Name { get; set; }  // Organizasyon adı
         public string Description { get; set; }  // Organizasyon açıklaması

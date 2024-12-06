@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
 
 namespace TaskManagementSystemBackend.Business.Validations
 {

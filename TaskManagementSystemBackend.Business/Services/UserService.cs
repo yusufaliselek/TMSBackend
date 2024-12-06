@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystemBackend.DataAccess;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
 namespace TaskManagementSystemBackend.Business.Services

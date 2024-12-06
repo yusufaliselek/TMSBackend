@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
 namespace TaskManagementSystemBackend.API.Controllers
@@ -89,6 +89,77 @@ namespace TaskManagementSystemBackend.API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Bir hata oluştu", details = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/users")]
+        public async Task<IActionResult> GetUsersByOrganizationId(int id)
+        {
+            try
+            {
+                var users = await _organizationService.GetUsersByOrganizationIdAsync(id);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Kullanıcılar alınırken bir hata oluştu", details = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/owner")]
+        public async Task<IActionResult> GetOwnerByOrganizationId(int id)
+        {
+            try
+            {
+                var owner = await _organizationService.GetOwnerByOrganizationIdAsync(id);
+                if (owner == null) return NotFound(new { message = "Organizasyon sahibi bulunamadı." });
+                return Ok(owner);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Sahibi alınırken bir hata oluştu", details = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/roles")]
+        public async Task<IActionResult> GetRolesByOrganizationId(int id)
+        {
+            try
+            {
+                var roles = await _organizationService.GetOrganizationRolesByOrganizationIdAsync(id);
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Roller alınırken bir hata oluştu", details = ex.Message });
+            }
+        }
+
+        [HttpPost("{id}/users/{userId}")]
+        public async Task<IActionResult> AddUserToOrganization(int id, int userId)
+        {
+            try
+            {
+                await _organizationService.AddUserToOrganizationAsync(id, userId);
+                return Ok(new { message = "Kullanıcı başarıyla organizasyona eklendi." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Kullanıcı eklenirken bir hata oluştu", details = ex.Message });
+            }
+        }
+
+        [HttpDelete("{id}/users/{userId}")]
+        public async Task<IActionResult> RemoveUserFromOrganization(int id, int userId)
+        {
+            try
+            {
+                await _organizationService.RemoveUserFromOrganizationAsync(id, userId);
+                return Ok(new { message = "Kullanıcı organizasyondan başarıyla çıkarıldı." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Kullanıcı çıkarılırken bir hata oluştu", details = ex.Message });
             }
         }
     }

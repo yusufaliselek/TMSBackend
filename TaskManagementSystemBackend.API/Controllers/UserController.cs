@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
 namespace TaskManagementSystemBackend.API.Controllers

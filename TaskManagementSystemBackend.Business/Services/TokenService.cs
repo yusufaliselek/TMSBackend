@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using TaskManagementSystemBackend.DataAccess;
 using TaskManagementSystemBackend.DataAccess.Configurations;
-using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Token;
 using TaskManagementSystemBackend.DataAccess.Entities;
 using TaskManagementSystemBackend.DataAccess.IServices;
 

@@ -1,4 +1,4 @@
-﻿using TaskManagementSystemBackend.DataAccess.DataTransferObjects;
+﻿using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Token;
 using TaskManagementSystemBackend.DataAccess.Entities;
 
 namespace TaskManagementSystemBackend.DataAccess.IServices
