@@ -36,6 +36,8 @@ cd TMSBackend
 
 1. `appsettings.json` dosyasındaki bağlantı dizesini veritabanınıza göre güncelleyin.
 2. Veritabanını oluşturmak için aşağıdaki komutu çalıştırın:
+3. For Mac: docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=Password!1" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/azure-sql-edge
+4. For Windows: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password!1" -p 1433:1433 --name mssql --hostname mssql -d mcr.microsoft.com/mssql/server:2022-latest
 
 ```bash
 dotnet ef database update
