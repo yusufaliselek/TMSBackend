@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystemBackend.DataAccess.DataTransferObjects.TaskUpdate;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
 namespace TaskManagementSystemBackend.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskUpdateController : ControllerBase

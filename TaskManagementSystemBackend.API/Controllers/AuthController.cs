@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
