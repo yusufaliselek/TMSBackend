@@ -19,7 +19,7 @@ namespace TaskManagementSystemBackend.Business.Mapping
 
             // Organization Mapping
             CreateMap<Organization, OrganizationDto>();
-            CreateMap<Organization, CreateOrganizationDto>();
+            CreateMap<CreateOrganizationDto, Organization>();
             CreateMap<Organization, UpdateOrganizationDto>();
 
             // Task Mapping

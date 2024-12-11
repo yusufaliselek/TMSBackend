@@ -4,12 +4,11 @@ namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organizatio
 {
     public class OrganizationDto
     {
-        public int Id { get; set; }  // Organizasyon ID'si
-        public string Name { get; set; }  // Organizasyon adı
-        public string Description { get; set; }  // Organizasyon açıklaması
-        public int OwnerId { get; set; }  // Organizasyon sahibi kullanıcı ID'si
-        public string OwnerName { get; set; }  // Organizasyon sahibi kullanıcı adı
-        public List<UserDto> Users { get; set; }  // Organizasyona ait kullanıcılar (DTO olarak)
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int OwnerId { get; set; }
+        public List<UserDto> Users { get; set; }
     }
 
 }
