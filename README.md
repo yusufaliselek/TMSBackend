@@ -1,4 +1,4 @@
-TR
+### TR
 # TMSBackend
 
 TMSBackend, .NET 8 Web API kullanılarak geliştirilmiş bir görev yönetim sistemidir. Kullanıcı kimlik doğrulama, rol tabanlı izinler, organizasyon yönetimi ve görev takibi gibi özellikleri destekler.
@@ -19,7 +19,7 @@ TMSBackend, .NET 8 Web API kullanılarak geliştirilmiş bir görev yönetim sis
 
 ## Kurulum
 
-### Prerequisites
+### Gereksinimler
 
 - .NET 8 SDK
 - SQL Server (veya başka bir desteklenen veritabanı)
@@ -35,9 +35,21 @@ cd TMSBackend
 ### Veritabanı Yapılandırması
 
 1. `appsettings.json` dosyasındaki bağlantı dizesini veritabanınıza göre güncelleyin.
-2. Veritabanını oluşturmak için aşağıdaki komutu çalıştırın:
-3. For Mac: docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=Password@strong123" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/azure-sql-edge
-4. For Windows: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password@strong123" -p 1433:1433 --name mssql --hostname mssql -d mcr.microsoft.com/mssql/server:2022-latest
+2. Veritabanını oluşturmak için aşağıdaki komutları kullanın:
+
+#### Docker ile SQL Server Kurulumu
+
+**Mac/Linux:**
+```bash
+docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=Password@strong123" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/azure-sql-edge
+```
+
+**Windows:**
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password@strong123" -p 1433:1433 --name mssql --hostname mssql -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+#### EF Migrations Uygulama
 
 ```bash
 dotnet ef database update
@@ -51,45 +63,33 @@ Uygulamayı yerel olarak çalıştırmak için:
 dotnet run
 ```
 
-API varsayılan olarak `https://localhost:5001` üzerinde çalışacaktır.
+API varsayılan olarak `https://localhost:5001` üzerinde çalışır.
 
-### API Endpoints
-
-- **POST** `/api/auth/login` - Kullanıcı girişi ve JWT token alma.
-- **POST** `/api/auth/register` - Yeni kullanıcı kaydı.
-- **POST** `/api/auth/refresh` - JWT token yenileme.
-- **GET** `/api/tasks` - Tüm görevleri listeleme.
-- **POST** `/api/tasks` - Yeni görev oluşturma.
-- **PUT** `/api/tasks/{taskId}` - Mevcut bir görevi güncelleme.
-- **DELETE** `/api/tasks/{taskId}` - Görev silme.
-
-### Seed Data
-
-Projede test amaçlı bazı roller ve izinler ile önceden tanımlanmış seed data bulunmaktadır.
 
 ## Katkı
 
 1. Depoyu fork’layın.
 2. Yeni bir özellik dalı oluşturun (`git checkout -b feature/ozellik`).
 3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik ekle'`).
-4. Dalınızı push edin (`git push origin feature/ozellik`).
+4. Branch'inizi push edin (`git push origin feature/ozellik`).
 5. Bir pull request oluşturun.
 
 ## Lisans
 
 Bu proje MIT Lisansı ile lisanslanmıştır - detaylar için [LICENSE](LICENSE) dosyasına bakınız.
----
-EN
-# TMSBackend
 
-TMSBackend is a task management system backend developed using .NET 8 Web API. It supports user authentication, role-based permissions, organization management, and task tracking features.
+
+### EN
+
+# TMSBackend
+TMSBackend is a task management system developed using .NET 8 Web API. It supports features such as user authentication, role-based permissions, organization management, and task tracking.
 
 ## Features
 
-- **User Authentication**: User login and registration with JWT token.
+- **User Authentication**: Login and registration with JWT-based tokens.
 - **Role-Based Authorization**: Manage roles and permissions for users within an organization.
 - **Task Management**: Create, update, delete tasks, and track their status.
-- **Organizational Structure**: Manage users, roles, and permissions within an organization.
+- **Organizational Structure**: Manage users, roles, and permissions on an organizational level.
 
 ## Technologies
 
@@ -100,11 +100,11 @@ TMSBackend is a task management system backend developed using .NET 8 Web API. I
 
 ## Setup
 
-### Prerequisites
+### Requirements
 
 - .NET 8 SDK
 - SQL Server (or another supported database)
-- Postman or any API testing tool.
+- Postman or another API testing tool.
 
 ### Clone the Repository
 
@@ -113,10 +113,24 @@ git clone https://github.com/your-username/TMSBackend.git
 cd TMSBackend
 ```
 
-### Database Setup
+### Database Configuration
 
-1. Update the connection string in `appsettings.json` to your database.
-2. Run the following command to apply the database migrations:
+1. Update the connection string in the `appsettings.json` file to match your database configuration.
+2. Use the following commands to set up the database:
+
+#### Setting up SQL Server with Docker
+
+**Mac/Linux:**
+```bash
+docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=Password@strong123" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/azure-sql-edge
+```
+
+**Windows:**
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password@strong123" -p 1433:1433 --name mssql --hostname mssql -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+#### Apply EF Migrations
 
 ```bash
 dotnet ef database update
@@ -130,28 +144,14 @@ Run the application locally:
 dotnet run
 ```
 
-The API will be hosted at `https://localhost:5001` by default.
-
-### API Endpoints
-
-- **POST** `/api/auth/login` - User login and JWT token generation.
-- **POST** `/api/auth/register` - User registration.
-- **POST** `/api/auth/refresh` - JWT token refresh.
-- **GET** `/api/tasks` - Get all tasks.
-- **POST** `/api/tasks` - Create a new task.
-- **PUT** `/api/tasks/{taskId}` - Update an existing task.
-- **DELETE** `/api/tasks/{taskId}` - Delete a task.
-
-### Seed Data
-
-The project includes predefined seed data for roles and permissions for testing purposes.
+The API will be available at `https://localhost:5001` by default.
 
 ## Contribution
 
 1. Fork the repository.
 2. Create a new feature branch (`git checkout -b feature/your-feature`).
 3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
+4. Push your branch (`git push origin feature/your-feature`).
 5. Open a pull request.
 
 ## License
