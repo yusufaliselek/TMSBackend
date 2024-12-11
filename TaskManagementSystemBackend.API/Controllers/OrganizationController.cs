@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagementSystemBackend.API.Attributes;
 using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
@@ -63,6 +64,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [PermissionRequirement("EditOrganization")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateOrganizationDto updateOrganizationDto)
         {
             try
@@ -95,6 +97,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpGet("{id}/users")]
+        [PermissionRequirement("ViewOrganizationUsers")]
         public async Task<IActionResult> GetUsersByOrganizationId(int id)
         {
             try
@@ -138,6 +141,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPost("{id}/users/{userId}")]
+        [PermissionRequirement("AddUserToOrganization")]
         public async Task<IActionResult> AddUserToOrganization(int id, int userId)
         {
             try

@@ -121,6 +121,8 @@ app.UseCors("CORSPolicy");
 
 app.UseAuthentication();
 
+app.UseMiddleware<AuthorizationMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllers();
