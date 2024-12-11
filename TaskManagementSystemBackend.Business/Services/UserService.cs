@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 using TaskManagementSystemBackend.DataAccess;
 using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organization;
 using TaskManagementSystemBackend.DataAccess.DataTransferObjects.User;
@@ -16,6 +17,14 @@ namespace TaskManagementSystemBackend.Business.Services
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        private bool IsTokenUserVerify(int userId, string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            if (jwtToken == null) return false;
+            return int.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value) == userId;
         }
 
         public async Task<UserDto> GetUserByIdAsync(int userId)
@@ -46,10 +55,12 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<UserDto> UpdateUserAsync(int userId, UpdateUserDto updateUserDto)
+        public async Task<UserDto> UpdateUserAsync(int userId, UpdateUserDto updateUserDto, string token)
         {
             try
             {
+                var isUserTokenVerify = IsTokenUserVerify(userId, token);
+                if (!isUserTokenVerify) throw new UnauthorizedAccessException("Token yetkisiz.");
                 var user = await _context.Users.FindAsync(userId);
                 if (user == null) return null;
 
@@ -64,12 +75,15 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<bool> DeleteUserAsync(int userId)
+        public async Task<bool> DeleteUserAsync(int userId, string token)
         {
             try
             {
+                var isUserTokenVerify = IsTokenUserVerify(userId, token);
+                if (!isUserTokenVerify) throw new UnauthorizedAccessException("Token yetkisiz.");
+
                 var user = await _context.Users.FindAsync(userId);
-                if (user == null) return false;
+                if (user == null) throw new UnauthorizedAccessException("Kullanıcı bulunamadı.");
 
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();

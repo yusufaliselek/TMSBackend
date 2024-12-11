@@ -56,7 +56,7 @@ namespace TaskManagementSystemBackend.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(new { message = "Geçersiz model verisi.", details = ModelState });
 
-                var updatedUser = await _userService.UpdateUserAsync(id, updateUserDto);
+                var updatedUser = await _userService.UpdateUserAsync(id, updateUserDto, Request.Headers["Authorization"].ToString().Split(" ")[1]);
                 if (updatedUser == null)
                     return NotFound(new { message = $"ID {id} ile kullanıcı bulunamadı." });
 
@@ -73,7 +73,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         {
             try
             {
-                var isDeleted = await _userService.DeleteUserAsync(id);
+                var isDeleted = await _userService.DeleteUserAsync(id, Request.Headers["Authorization"].ToString().Split(" ")[1]);
                 if (!isDeleted)
                     return NotFound(new { message = $"ID {id} ile kullanıcı bulunamadı." });
 
