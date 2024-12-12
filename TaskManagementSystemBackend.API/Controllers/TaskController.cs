@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagementSystemBackend.API.Attributes;
 using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Task;
 using TaskManagementSystemBackend.DataAccess.IServices;
 
@@ -49,6 +50,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPost]
+        [PermissionRequirement("CreateTask")]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto createTaskDto)
         {
             if (!ModelState.IsValid)
@@ -66,6 +68,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPut("{taskId}")]
+        [PermissionRequirement("EditTask")]
         public async Task<IActionResult> UpdateTask(int taskId, [FromBody] UpdateTaskDto updateTaskDto)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpDelete("{taskId}")]
+        [PermissionRequirement("DeleteTask")]
         public async Task<IActionResult> DeleteTask(int taskId)
         {
             try

@@ -21,13 +21,14 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
 
         [Required]
         public User User { get; set; }
+        // Organizasyon eklenip migrate edilecek - - !!
     }
 
     public enum TaskStatus
     {
         Pending,    // Beklemede
-        InProgress, // Devam ediyor
+        InProgress, // Devam ediyor - İşlemde
         Completed,  // Tamamlandı
-        Archived    // Arşivlendi
+        Archived    // Arşiv - Pasif
     }
 }

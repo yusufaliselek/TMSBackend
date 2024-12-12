@@ -32,6 +32,7 @@ namespace TaskManagementSystemBackend.API.Controllers
             }
         }
 
+        [OrganizationUserValidation]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -64,6 +65,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [OrganizationUserValidation]
         [PermissionRequirement("EditOrganization")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateOrganizationDto updateOrganizationDto)
         {
@@ -82,6 +84,8 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [OrganizationUserValidation]
+        [PermissionRequirement("DeleteOrganization")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -97,6 +101,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpGet("{id}/users")]
+        [OrganizationUserValidation]
         [PermissionRequirement("ViewOrganizationUsers")]
         public async Task<IActionResult> GetUsersByOrganizationId(int id)
         {
@@ -112,6 +117,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpGet("{id}/owner")]
+        [OrganizationUserValidation]
         public async Task<IActionResult> GetOwnerByOrganizationId(int id)
         {
             try
@@ -127,6 +133,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpGet("{id}/roles")]
+        [OrganizationUserValidation]
         public async Task<IActionResult> GetRolesByOrganizationId(int id)
         {
             try
@@ -141,6 +148,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPost("{id}/users/{userId}")]
+        [OrganizationUserValidation]
         [PermissionRequirement("AddUserToOrganization")]
         public async Task<IActionResult> AddUserToOrganization(int id, int userId)
         {
@@ -156,6 +164,8 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpDelete("{id}/users/{userId}")]
+        [OrganizationUserValidation]
+        [PermissionRequirement("RemoveUserFromOrganization")]
         public async Task<IActionResult> RemoveUserFromOrganization(int id, int userId)
         {
             try

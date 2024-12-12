@@ -114,6 +114,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<TokenValidationMiddleware>();
+app.UseMiddleware<OrganizationUserValidationMiddleware>();
 
 app.UseHttpsRedirection();
 
