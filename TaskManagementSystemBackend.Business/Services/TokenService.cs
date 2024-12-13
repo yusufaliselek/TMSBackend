@@ -74,5 +74,14 @@ namespace TaskManagementSystemBackend.Business.Services
 
             return tokenDto;
         }
+
+        public int GetUserIdFromToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            if (jwtToken == null) throw new SecurityTokenException("Token geçersiz.");
+            return int.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value);
+
+        }
     }
 }

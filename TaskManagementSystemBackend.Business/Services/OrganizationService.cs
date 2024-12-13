@@ -13,11 +13,13 @@ namespace TaskManagementSystemBackend.Business.Services
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ITokenService _tokenService;
 
-        public OrganizationService(AppDbContext context, IMapper mapper)
+        public OrganizationService(AppDbContext context, IMapper mapper, ITokenService tokenService)
         {
             _context = context;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
 
         public async Task<OrganizationDto> GetOrganizationByIdAsync(int organizationId)
@@ -48,11 +50,13 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<OrganizationDto> CreateOrganizationAsync(CreateOrganizationDto organizationDto)
+        public async Task<OrganizationDto> CreateOrganizationAsync(CreateOrganizationDto organizationDto, string token)
         {
             try
             {
+                var userId = _tokenService.GetUserIdFromToken(token);
                 var organization = _mapper.Map<Organization>(organizationDto);
+                organization.OwnerId = userId;
                 await _context.Organizations.AddAsync(organization);
                 await _context.SaveChangesAsync();
                 return _mapper.Map<OrganizationDto>(organization);
@@ -68,7 +72,7 @@ namespace TaskManagementSystemBackend.Business.Services
             try
             {
                 var organization = await _context.Organizations.FindAsync(organizationId);
-                if (organization == null) return null;
+                if (organization == null) throw new Exception("Organizasyon bulunamadı!");
 
                 _mapper.Map(updateOrganizationDto, organization);
                 _context.Organizations.Update(organization);

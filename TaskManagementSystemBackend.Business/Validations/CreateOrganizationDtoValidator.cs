@@ -14,9 +14,6 @@ namespace TaskManagementSystemBackend.Business.Validations
             RuleFor(x => x.Description)
                 .NotEmpty().WithMessage("Organizasyon açıklaması boş bırakılamaz.")
                 .MaximumLength(500).WithMessage("Organizasyon açıklaması en fazla 500 karakter olmalıdır.");
-
-            RuleFor(x => x.OwnerId)
-                .GreaterThan(0).WithMessage("Organizasyon sahibi geçerli bir kullanıcı olmalıdır.");
         }
     }
 }

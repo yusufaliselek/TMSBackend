@@ -54,8 +54,7 @@ namespace TaskManagementSystemBackend.API.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest(new { message = "Geçersiz model verisi.", details = ModelState });
-
-                var createdOrganization = await _organizationService.CreateOrganizationAsync(organizationDto);
+                var createdOrganization = await _organizationService.CreateOrganizationAsync(organizationDto, Request.Headers["Authorization"].SingleOrDefault()?.Split(" ").Last());
                 return CreatedAtAction(nameof(GetById), new { id = createdOrganization.Id }, createdOrganization);
             }
             catch (Exception ex)

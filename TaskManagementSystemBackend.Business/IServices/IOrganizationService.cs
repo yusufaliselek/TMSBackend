@@ -8,7 +8,7 @@ namespace TaskManagementSystemBackend.DataAccess.IServices
     {
         Task<OrganizationDto> GetOrganizationByIdAsync(int organizationId);
         Task<IEnumerable<OrganizationDto>> GetAllOrganizationsAsync();
-        Task<OrganizationDto> CreateOrganizationAsync(CreateOrganizationDto organizationDto);
+        Task<OrganizationDto> CreateOrganizationAsync(CreateOrganizationDto organizationDto, string token);
         Task<OrganizationDto> UpdateOrganizationAsync(int organizationId, UpdateOrganizationDto updateOrganizationDto);
         Task<bool> DeleteOrganizationAsync(int organizationId);
         Task<IEnumerable<UserDto>> GetUsersByOrganizationIdAsync(int organizationId);
