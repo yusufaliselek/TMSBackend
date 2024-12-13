@@ -122,7 +122,7 @@ app.UseCors("CORSPolicy");
 
 app.UseAuthentication();
 
-app.UseMiddleware<AuthorizationMiddleware>();
+app.UseMiddleware<PermissionRequirementMiddleware>();
 
 app.UseAuthorization();
 

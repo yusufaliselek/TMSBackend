@@ -12,7 +12,7 @@ using TaskManagementSystemBackend.DataAccess;
 namespace TaskManagementSystemBackend.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241206162726_init-1")]
+    [Migration("20241213171158_init-1")]
     partial class init1
     {
         /// <inheritdoc />
@@ -185,221 +185,210 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1404),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2018),
                             CreatedBy = 0,
-                            Description = "Yeni bir organizasyon oluşturma yetkisi",
+                            Description = "Organizasyon bilgilerini düzenleme yetkisi",
                             IsDeleted = false,
-                            Name = "CreateOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1422),
+                            Name = "EditOrganization",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2034),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1429),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2039),
                             CreatedBy = 0,
-                            Description = "Organizasyon bilgilerini düzenleme yetkisi",
+                            Description = "Organizasyon silme yetkisi",
                             IsDeleted = false,
-                            Name = "EditOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1429),
+                            Name = "DeleteOrganization",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2039),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1430),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2040),
                             CreatedBy = 0,
-                            Description = "Organizasyon silme yetkisi",
+                            Description = "Organizasyon bilgilerini görüntüleme yetkisi",
                             IsDeleted = false,
-                            Name = "DeleteOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1430),
+                            Name = "ViewOrganization",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2041),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1431),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2042),
                             CreatedBy = 0,
-                            Description = "Organizasyon bilgilerini görüntüleme yetkisi",
+                            Description = "Organizasyon içinde yeni rol oluşturma yetkisi",
                             IsDeleted = false,
-                            Name = "ViewOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1432),
+                            Name = "CreateRole",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2042),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1432),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2043),
                             CreatedBy = 0,
-                            Description = "Organizasyon içinde yeni rol oluşturma yetkisi",
+                            Description = "Organizasyon içindeki rolleri düzenleme yetkisi",
                             IsDeleted = false,
-                            Name = "CreateRole",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1433),
+                            Name = "EditRole",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2043),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1434),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2045),
                             CreatedBy = 0,
-                            Description = "Organizasyon içindeki rolleri düzenleme yetkisi",
+                            Description = "Organizasyon içindeki rolleri silme yetkisi",
                             IsDeleted = false,
-                            Name = "EditRole",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1435),
+                            Name = "DeleteRole",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2045),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1435),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2046),
                             CreatedBy = 0,
-                            Description = "Organizasyon içindeki rolleri silme yetkisi",
+                            Description = "Rolleri kullanıcılara atama yetkisi",
                             IsDeleted = false,
-                            Name = "DeleteRole",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1436),
+                            Name = "AssignRole",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2046),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1437),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2047),
                             CreatedBy = 0,
-                            Description = "Rolleri kullanıcılara atama yetkisi",
+                            Description = "Rolleri görüntüleme yetkisi",
                             IsDeleted = false,
-                            Name = "AssignRole",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1437),
+                            Name = "ViewRoles",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2048),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1438),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2048),
                             CreatedBy = 0,
-                            Description = "Rolleri görüntüleme yetkisi",
+                            Description = "Yeni görev oluşturma yetkisi",
                             IsDeleted = false,
-                            Name = "ViewRoles",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1438),
+                            Name = "CreateTask",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2049),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1440),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2050),
                             CreatedBy = 0,
-                            Description = "Yeni görev oluşturma yetkisi",
+                            Description = "Mevcut görevleri düzenleme yetkisi",
                             IsDeleted = false,
-                            Name = "CreateTask",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1440),
+                            Name = "EditTask",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2050),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1441),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2051),
                             CreatedBy = 0,
-                            Description = "Mevcut görevleri düzenleme yetkisi",
+                            Description = "Görev silme yetkisi",
                             IsDeleted = false,
-                            Name = "EditTask",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1441),
+                            Name = "DeleteTask",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2052),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1442),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2052),
                             CreatedBy = 0,
-                            Description = "Görev silme yetkisi",
+                            Description = "Görev bilgilerini görüntüleme yetkisi",
                             IsDeleted = false,
-                            Name = "DeleteTask",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1442),
+                            Name = "ViewTask",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2053),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 13,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1443),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2054),
                             CreatedBy = 0,
-                            Description = "Görev bilgilerini görüntüleme yetkisi",
+                            Description = "Görevleri kullanıcılara atama yetkisi",
                             IsDeleted = false,
-                            Name = "ViewTask",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1443),
+                            Name = "AssignTask",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2054),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 14,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1444),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2055),
                             CreatedBy = 0,
-                            Description = "Görevleri kullanıcılara atama yetkisi",
+                            Description = "Görev durumunu güncelleme yetkisi",
                             IsDeleted = false,
-                            Name = "AssignTask",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1445),
+                            Name = "UpdateTaskStatus",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2055),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 15,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1445),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2056),
                             CreatedBy = 0,
-                            Description = "Görev durumunu güncelleme yetkisi",
+                            Description = "Görev durumu güncellemelerini görüntüleme yetkisi",
                             IsDeleted = false,
-                            Name = "UpdateTaskStatus",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1446),
+                            Name = "ViewTaskUpdates",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2056),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 16,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1446),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2057),
                             CreatedBy = 0,
-                            Description = "Görev durumu güncellemelerini görüntüleme yetkisi",
+                            Description = "Organizasyona kullanıcı ekleme yetkisi",
                             IsDeleted = false,
-                            Name = "ViewTaskUpdates",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1447),
+                            Name = "AddUserToOrganization",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2057),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 17,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1448),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2058),
                             CreatedBy = 0,
-                            Description = "Organizasyona kullanıcı ekleme yetkisi",
+                            Description = "Organizasyondan kullanıcı çıkarma yetkisi",
                             IsDeleted = false,
-                            Name = "AddUserToOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1448),
+                            Name = "RemoveUserFromOrganization",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2058),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 18,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1449),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2059),
                             CreatedBy = 0,
-                            Description = "Organizasyondan kullanıcı çıkarma yetkisi",
+                            Description = "Organizasyon kullanıcılarını görüntüleme yetkisi",
                             IsDeleted = false,
-                            Name = "RemoveUserFromOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1450),
+                            Name = "ViewOrganizationUsers",
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2060),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 19,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1450),
-                            CreatedBy = 0,
-                            Description = "Organizasyon kullanıcılarını görüntüleme yetkisi",
-                            IsDeleted = false,
-                            Name = "ViewOrganizationUsers",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1451),
-                            UpdatedBy = 0
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CreatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1451),
+                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2061),
                             CreatedBy = 0,
                             Description = "İzinleri yönetme yetkisi",
                             IsDeleted = false,
                             Name = "ManagePermissions",
-                            UpdatedAt = new DateTime(2024, 12, 6, 19, 27, 26, 244, DateTimeKind.Local).AddTicks(1452),
+                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2061),
                             UpdatedBy = 0
                         });
                 });

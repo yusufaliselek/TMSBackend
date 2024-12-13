@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TaskManagementSystemBackend.API.Middlewares
 {
-    public class AuthorizationMiddleware
+    public class PermissionRequirementMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<AuthorizationMiddleware> _logger;
+        private readonly ILogger<PermissionRequirementMiddleware> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public AuthorizationMiddleware(RequestDelegate next, ILogger<AuthorizationMiddleware> logger, IServiceScopeFactory serviceScopeFactory)
+        public PermissionRequirementMiddleware(RequestDelegate next, ILogger<PermissionRequirementMiddleware> logger, IServiceScopeFactory serviceScopeFactory)
         {
             _next = next;
             _logger = logger;
