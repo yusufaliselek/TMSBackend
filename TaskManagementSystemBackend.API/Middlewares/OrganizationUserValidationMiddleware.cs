@@ -35,46 +35,24 @@ namespace TaskManagementSystemBackend.API.Middlewares
                     await context.Response.WriteAsJsonAsync(new { message = "Organization-Id header is missing." });
                     return;
                 }
-
-                var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-                if (string.IsNullOrEmpty(token))
+                var userId = context.Items["UserId"] as int?;
+                if (!userId.HasValue)
                 {
                     context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    await context.Response.WriteAsJsonAsync(new { message = "Authorization token is missing." });
+                    await context.Response.WriteAsJsonAsync(new { message = "User ID is missing." });
                     return;
                 }
 
                 using var scope = _serviceScopeFactory.CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-                var handler = new JwtSecurityTokenHandler();
-                if (handler.CanReadToken(token))
+                var isUserInOrganization = await dbContext.OrganizationUsers.AnyAsync(uo => uo.UserId == userId && uo.OrganizationId == int.Parse(organizationId));
+                var isUserAdminInOrganization = await dbContext.Organizations.AnyAsync(o => o.Id == int.Parse(organizationId) && o.OwnerId == userId);
+
+                if (!isUserInOrganization && !isUserAdminInOrganization)
                 {
-                    var jwtToken = handler.ReadJwtToken(token);
-                    var userIdClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
-
-                    if (userIdClaim == null)
-                    {
-                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        await context.Response.WriteAsJsonAsync(new { message = "User ID is missing in the token." });
-                        return;
-                    }
-
-                    var userId = int.Parse(userIdClaim);
-                    var isUserInOrganization = await dbContext.OrganizationUsers.AnyAsync(uo => uo.UserId == userId && uo.OrganizationId == int.Parse(organizationId));
-                    var isUserAdminInOrganization = await dbContext.Organizations.AnyAsync(o => o.Id == int.Parse(organizationId) && o.OwnerId == userId);
-
-                    if (!isUserInOrganization && !isUserAdminInOrganization)
-                    {
-                        context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                        await context.Response.WriteAsJsonAsync(new { message = "User is not a member of the organization." });
-                        return;
-                    }
-                }
-                else
-                {
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    await context.Response.WriteAsJsonAsync(new { message = "Invalid token." });
+                    context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                    await context.Response.WriteAsJsonAsync(new { message = "User is not a member of the organization." });
                     return;
                 }
 
