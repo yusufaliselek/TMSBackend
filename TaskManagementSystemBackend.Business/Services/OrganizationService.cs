@@ -112,7 +112,7 @@ namespace TaskManagementSystemBackend.Business.Services
                     throw new Exception("Organizasyon bulunamadı");
                 }
 
-                var userOrganizations = await _context.UserOrganizations.Where(uo => uo.OrganizationId == organizationId).ToListAsync();
+                var userOrganizations = await _context.OrganizationUsers.Where(uo => uo.OrganizationId == organizationId).ToListAsync();
                 var users = new List<User>();
                 foreach (var user in userOrganizations)
                 {
@@ -173,18 +173,18 @@ namespace TaskManagementSystemBackend.Business.Services
                 var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
                 if (!userExists) throw new Exception("Kullanıcı bulunamadı");
 
-                var userOrganizationExists = await _context.UserOrganizations
+                var userOrganizationExists = await _context.OrganizationUsers
                     .AnyAsync(uo => uo.OrganizationId == organizationId && uo.UserId == userId);
 
                 if (userOrganizationExists) throw new Exception("Kullanıcı zaten organizasyona eklenmiş");
 
-                var userOrganization = new UserOrganization
+                var userOrganization = new OrganizationUser
                 {
                     OrganizationId = organizationId,
                     UserId = userId
                 };
 
-                await _context.UserOrganizations.AddAsync(userOrganization);
+                await _context.OrganizationUsers.AddAsync(userOrganization);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -197,12 +197,12 @@ namespace TaskManagementSystemBackend.Business.Services
         {
             try
             {
-                var userOrganization = await _context.UserOrganizations
+                var userOrganization = await _context.OrganizationUsers
                     .FirstOrDefaultAsync(uo => uo.OrganizationId == organizationId && uo.UserId == userId);
 
                 if (userOrganization == null) throw new Exception("Kullanıcı organizasyonda bulunamadı");
 
-                _context.UserOrganizations.Remove(userOrganization);
+                _context.OrganizationUsers.Remove(userOrganization);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystemBackend.DataAccess.Entities
 {
-    public class UserOrganization : Base
+    public class OrganizationUser : Base
     {
         [Required]
         public int UserId { get; set; }

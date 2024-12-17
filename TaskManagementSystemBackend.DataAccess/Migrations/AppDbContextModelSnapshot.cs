@@ -68,6 +68,198 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                     b.ToTable("Organizations");
                 });
 
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("OrganizationProject");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("OrganizationProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrganizationProjectTaskCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RowNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationProjectId");
+
+                    b.HasIndex("OrganizationProjectTaskCategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrganizationProjectTasks");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTaskCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ColumnNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrganizationProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationProjectId");
+
+                    b.ToTable("OrganizationProjectTaskCategory");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTaskUpdate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NewStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OldStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrganizationProjectTaskUpdates");
+                });
+
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationRole", b =>
                 {
                     b.Property<int>("Id")
@@ -143,6 +335,78 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                     b.ToTable("OrganizationRolePermissions");
                 });
 
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrganizationUsers");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationUserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrganizationRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationRoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrganizationUserRoles");
+                });
+
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.Permission", b =>
                 {
                     b.Property<int>("Id")
@@ -182,303 +446,212 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2018),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7376),
                             CreatedBy = 0,
                             Description = "Organizasyon bilgilerini düzenleme yetkisi",
                             IsDeleted = false,
                             Name = "EditOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2034),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7388),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2039),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7394),
                             CreatedBy = 0,
                             Description = "Organizasyon silme yetkisi",
                             IsDeleted = false,
                             Name = "DeleteOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2039),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7395),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2040),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7396),
                             CreatedBy = 0,
                             Description = "Organizasyon bilgilerini görüntüleme yetkisi",
                             IsDeleted = false,
                             Name = "ViewOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2041),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7396),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2042),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7397),
                             CreatedBy = 0,
                             Description = "Organizasyon içinde yeni rol oluşturma yetkisi",
                             IsDeleted = false,
                             Name = "CreateRole",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2042),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7398),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2043),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7398),
                             CreatedBy = 0,
                             Description = "Organizasyon içindeki rolleri düzenleme yetkisi",
                             IsDeleted = false,
                             Name = "EditRole",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2043),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7399),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2045),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7400),
                             CreatedBy = 0,
                             Description = "Organizasyon içindeki rolleri silme yetkisi",
                             IsDeleted = false,
                             Name = "DeleteRole",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2045),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7401),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2046),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7402),
                             CreatedBy = 0,
                             Description = "Rolleri kullanıcılara atama yetkisi",
                             IsDeleted = false,
                             Name = "AssignRole",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2046),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7402),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2047),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7403),
                             CreatedBy = 0,
                             Description = "Rolleri görüntüleme yetkisi",
                             IsDeleted = false,
                             Name = "ViewRoles",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2048),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7403),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2048),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7404),
                             CreatedBy = 0,
                             Description = "Yeni görev oluşturma yetkisi",
                             IsDeleted = false,
                             Name = "CreateTask",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2049),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7404),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2050),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7406),
                             CreatedBy = 0,
                             Description = "Mevcut görevleri düzenleme yetkisi",
                             IsDeleted = false,
                             Name = "EditTask",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2050),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7406),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2051),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7407),
                             CreatedBy = 0,
                             Description = "Görev silme yetkisi",
                             IsDeleted = false,
                             Name = "DeleteTask",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2052),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7407),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2052),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7408),
                             CreatedBy = 0,
                             Description = "Görev bilgilerini görüntüleme yetkisi",
                             IsDeleted = false,
                             Name = "ViewTask",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2053),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7408),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 13,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2054),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7409),
                             CreatedBy = 0,
                             Description = "Görevleri kullanıcılara atama yetkisi",
                             IsDeleted = false,
                             Name = "AssignTask",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2054),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7409),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 14,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2055),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7410),
                             CreatedBy = 0,
                             Description = "Görev durumunu güncelleme yetkisi",
                             IsDeleted = false,
                             Name = "UpdateTaskStatus",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2055),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7410),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 15,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2056),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7411),
                             CreatedBy = 0,
                             Description = "Görev durumu güncellemelerini görüntüleme yetkisi",
                             IsDeleted = false,
                             Name = "ViewTaskUpdates",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2056),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7411),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 16,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2057),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7412),
                             CreatedBy = 0,
                             Description = "Organizasyona kullanıcı ekleme yetkisi",
                             IsDeleted = false,
                             Name = "AddUserToOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2057),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7413),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 17,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2058),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7413),
                             CreatedBy = 0,
                             Description = "Organizasyondan kullanıcı çıkarma yetkisi",
                             IsDeleted = false,
                             Name = "RemoveUserFromOrganization",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2058),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7414),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 18,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2059),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7415),
                             CreatedBy = 0,
                             Description = "Organizasyon kullanıcılarını görüntüleme yetkisi",
                             IsDeleted = false,
                             Name = "ViewOrganizationUsers",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2060),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7415),
                             UpdatedBy = 0
                         },
                         new
                         {
                             Id = 19,
-                            CreatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2061),
+                            CreatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7416),
                             CreatedBy = 0,
                             Description = "İzinleri yönetme yetkisi",
                             IsDeleted = false,
                             Name = "ManagePermissions",
-                            UpdatedAt = new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2061),
+                            UpdatedAt = new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7416),
                             UpdatedBy = 0
                         });
-                });
-
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.TaskBase", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<DateTime?>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.TaskUpdate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("NewStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OldStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TaskUpdates");
                 });
 
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.Token", b =>
@@ -579,83 +752,56 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.UserOrganization", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrganizationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserOrganizations");
-                });
-
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.UserOrganizationRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrganizationRoleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationRoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserOrganizationRoles");
-                });
-
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.Organization", b =>
                 {
                     b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.User", null)
                         .WithMany("Organizations")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProject", b =>
+                {
+                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTask", b =>
+                {
+                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProject", null)
+                        .WithMany("OrganizationProjectTasks")
+                        .HasForeignKey("OrganizationProjectId");
+
+                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTaskCategory", "OrganizationProjectTaskCategory")
+                        .WithMany("OrganizationProjectTasks")
+                        .HasForeignKey("OrganizationProjectTaskCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrganizationProjectTaskCategory");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTaskCategory", b =>
+                {
+                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProject", "OrganizationProject")
+                        .WithMany("OrganizationProjectTaskCategories")
+                        .HasForeignKey("OrganizationProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrganizationProject");
                 });
 
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationRole", b =>
@@ -688,29 +834,7 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                     b.Navigation("Permission");
                 });
 
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.TaskBase", b =>
-                {
-                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.Token", b =>
-                {
-                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.UserOrganizationRole", b =>
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationUserRole", b =>
                 {
                     b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.OrganizationRole", "OrganizationRole")
                         .WithMany("UserOrganizationRoles")
@@ -729,9 +853,32 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.Token", b =>
+                {
+                    b.HasOne("TaskManagementSystemBackend.DataAccess.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.Organization", b =>
                 {
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProject", b =>
+                {
+                    b.Navigation("OrganizationProjectTaskCategories");
+
+                    b.Navigation("OrganizationProjectTasks");
+                });
+
+            modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationProjectTaskCategory", b =>
+                {
+                    b.Navigation("OrganizationProjectTasks");
                 });
 
             modelBuilder.Entity("TaskManagementSystemBackend.DataAccess.Entities.OrganizationRole", b =>

@@ -12,12 +12,12 @@ namespace TaskManagementSystemBackend.DataAccess
         }
 
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<TaskUpdate> TaskUpdates { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<TaskBase> Tasks { get; set; }
-        public DbSet<UserOrganization> UserOrganizations { get; set; }
-        public DbSet<UserOrganizationRole> UserOrganizationRoles { get; set; }
+        public DbSet<OrganizationProjectTask> OrganizationProjectTasks { get; set; }
+        public DbSet<OrganizationProjectTaskUpdate> OrganizationProjectTaskUpdates { get; set; }
+        public DbSet<OrganizationUser> OrganizationUsers { get; set; }
+        public DbSet<OrganizationUserRole> OrganizationUserRoles { get; set; }
         public DbSet<OrganizationRole> OrganizationRoles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<OrganizationRolePermission> OrganizationRolePermissions { get; set; }

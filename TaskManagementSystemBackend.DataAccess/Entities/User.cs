@@ -22,6 +22,6 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
         public string PasswordHash { get; set; }
 
         public ICollection<Organization> Organizations { get; set; }
-        public ICollection<UserOrganizationRole> UserOrganizationRoles { get; set; }
+        public ICollection<OrganizationUserRole> UserOrganizationRoles { get; set; }
     }
 }

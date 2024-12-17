@@ -8,7 +8,7 @@ using TaskManagementSystemBackend.DataAccess.DataTransferObjects.TaskUpdate;
 
 namespace TaskManagementSystemBackend.Business.Validations
 {
-    public class UpdateTaskUpdateDtoValidator : AbstractValidator<UpdateTaskUpdateDto>
+    public class UpdateTaskUpdateDtoValidator : AbstractValidator<UpdateOrganizationProjectTaskUpdateDto>
     {
         public UpdateTaskUpdateDtoValidator()
         {

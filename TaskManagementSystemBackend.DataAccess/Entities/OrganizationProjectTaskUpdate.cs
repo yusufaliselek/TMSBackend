@@ -2,16 +2,16 @@
 
 namespace TaskManagementSystemBackend.DataAccess.Entities
 {
-    public class TaskUpdate : Base
+    public class OrganizationProjectTaskUpdate : Base
     {
         [Required]
         public int TaskId { get; set; }
 
         [Required]
-        public TaskStatus OldStatus { get; set; }
+        public OrganizationProjectTaskStatus OldStatus { get; set; }
 
         [Required]
-        public TaskStatus NewStatus { get; set; }
+        public OrganizationProjectTaskStatus NewStatus { get; set; }
 
         [MaxLength(1000)]
         public string Comment { get; set; }

@@ -14,26 +14,7 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TaskUpdates",
+                name: "OrganizationProjectTaskUpdates",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -50,11 +31,11 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaskUpdates", x => x.Id);
+                    table.PrimaryKey("PK_OrganizationProjectTaskUpdates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserOrganizations",
+                name: "OrganizationUsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -69,7 +50,26 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserOrganizations", x => x.Id);
+                    table.PrimaryKey("PK_OrganizationUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,34 +120,6 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tokens",
                 columns: table => new
                 {
@@ -177,6 +149,32 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrganizationProject",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrganizationId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrganizationProject", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrganizationProject_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrganizationRoles",
                 columns: table => new
                 {
@@ -197,6 +195,33 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                         name: "FK_OrganizationRoles_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrganizationProjectTaskCategory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ColumnNumber = table.Column<int>(type: "int", nullable: false),
+                    OrganizationProjectId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrganizationProjectTaskCategory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrganizationProjectTaskCategory_OrganizationProject_OrganizationProjectId",
+                        column: x => x.OrganizationProjectId,
+                        principalTable: "OrganizationProject",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -233,7 +258,7 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserOrganizationRoles",
+                name: "OrganizationUserRoles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -248,15 +273,58 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserOrganizationRoles", x => x.Id);
+                    table.PrimaryKey("PK_OrganizationUserRoles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserOrganizationRoles_OrganizationRoles_OrganizationRoleId",
+                        name: "FK_OrganizationUserRoles_OrganizationRoles_OrganizationRoleId",
                         column: x => x.OrganizationRoleId,
                         principalTable: "OrganizationRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserOrganizationRoles_Users_UserId",
+                        name: "FK_OrganizationUserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrganizationProjectTasks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Priority = table.Column<int>(type: "int", nullable: false),
+                    RowNumber = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    OrganizationProjectTaskCategoryId = table.Column<int>(type: "int", nullable: false),
+                    OrganizationProjectId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrganizationProjectTasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrganizationProjectTasks_OrganizationProjectTaskCategory_OrganizationProjectTaskCategoryId",
+                        column: x => x.OrganizationProjectTaskCategoryId,
+                        principalTable: "OrganizationProjectTaskCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrganizationProjectTasks_OrganizationProject_OrganizationProjectId",
+                        column: x => x.OrganizationProjectId,
+                        principalTable: "OrganizationProject",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_OrganizationProjectTasks_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -268,26 +336,51 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IsDeleted", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2018), 0, "Organizasyon bilgilerini düzenleme yetkisi", false, "EditOrganization", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2034), 0 },
-                    { 2, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2039), 0, "Organizasyon silme yetkisi", false, "DeleteOrganization", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2039), 0 },
-                    { 3, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2040), 0, "Organizasyon bilgilerini görüntüleme yetkisi", false, "ViewOrganization", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2041), 0 },
-                    { 4, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2042), 0, "Organizasyon içinde yeni rol oluşturma yetkisi", false, "CreateRole", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2042), 0 },
-                    { 5, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2043), 0, "Organizasyon içindeki rolleri düzenleme yetkisi", false, "EditRole", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2043), 0 },
-                    { 6, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2045), 0, "Organizasyon içindeki rolleri silme yetkisi", false, "DeleteRole", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2045), 0 },
-                    { 7, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2046), 0, "Rolleri kullanıcılara atama yetkisi", false, "AssignRole", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2046), 0 },
-                    { 8, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2047), 0, "Rolleri görüntüleme yetkisi", false, "ViewRoles", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2048), 0 },
-                    { 9, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2048), 0, "Yeni görev oluşturma yetkisi", false, "CreateTask", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2049), 0 },
-                    { 10, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2050), 0, "Mevcut görevleri düzenleme yetkisi", false, "EditTask", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2050), 0 },
-                    { 11, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2051), 0, "Görev silme yetkisi", false, "DeleteTask", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2052), 0 },
-                    { 12, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2052), 0, "Görev bilgilerini görüntüleme yetkisi", false, "ViewTask", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2053), 0 },
-                    { 13, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2054), 0, "Görevleri kullanıcılara atama yetkisi", false, "AssignTask", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2054), 0 },
-                    { 14, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2055), 0, "Görev durumunu güncelleme yetkisi", false, "UpdateTaskStatus", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2055), 0 },
-                    { 15, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2056), 0, "Görev durumu güncellemelerini görüntüleme yetkisi", false, "ViewTaskUpdates", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2056), 0 },
-                    { 16, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2057), 0, "Organizasyona kullanıcı ekleme yetkisi", false, "AddUserToOrganization", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2057), 0 },
-                    { 17, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2058), 0, "Organizasyondan kullanıcı çıkarma yetkisi", false, "RemoveUserFromOrganization", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2058), 0 },
-                    { 18, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2059), 0, "Organizasyon kullanıcılarını görüntüleme yetkisi", false, "ViewOrganizationUsers", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2060), 0 },
-                    { 19, new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2061), 0, "İzinleri yönetme yetkisi", false, "ManagePermissions", new DateTime(2024, 12, 13, 20, 11, 57, 909, DateTimeKind.Local).AddTicks(2061), 0 }
+                    { 1, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7376), 0, "Organizasyon bilgilerini düzenleme yetkisi", false, "EditOrganization", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7388), 0 },
+                    { 2, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7394), 0, "Organizasyon silme yetkisi", false, "DeleteOrganization", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7395), 0 },
+                    { 3, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7396), 0, "Organizasyon bilgilerini görüntüleme yetkisi", false, "ViewOrganization", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7396), 0 },
+                    { 4, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7397), 0, "Organizasyon içinde yeni rol oluşturma yetkisi", false, "CreateRole", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7398), 0 },
+                    { 5, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7398), 0, "Organizasyon içindeki rolleri düzenleme yetkisi", false, "EditRole", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7399), 0 },
+                    { 6, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7400), 0, "Organizasyon içindeki rolleri silme yetkisi", false, "DeleteRole", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7401), 0 },
+                    { 7, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7402), 0, "Rolleri kullanıcılara atama yetkisi", false, "AssignRole", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7402), 0 },
+                    { 8, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7403), 0, "Rolleri görüntüleme yetkisi", false, "ViewRoles", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7403), 0 },
+                    { 9, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7404), 0, "Yeni görev oluşturma yetkisi", false, "CreateTask", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7404), 0 },
+                    { 10, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7406), 0, "Mevcut görevleri düzenleme yetkisi", false, "EditTask", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7406), 0 },
+                    { 11, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7407), 0, "Görev silme yetkisi", false, "DeleteTask", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7407), 0 },
+                    { 12, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7408), 0, "Görev bilgilerini görüntüleme yetkisi", false, "ViewTask", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7408), 0 },
+                    { 13, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7409), 0, "Görevleri kullanıcılara atama yetkisi", false, "AssignTask", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7409), 0 },
+                    { 14, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7410), 0, "Görev durumunu güncelleme yetkisi", false, "UpdateTaskStatus", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7410), 0 },
+                    { 15, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7411), 0, "Görev durumu güncellemelerini görüntüleme yetkisi", false, "ViewTaskUpdates", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7411), 0 },
+                    { 16, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7412), 0, "Organizasyona kullanıcı ekleme yetkisi", false, "AddUserToOrganization", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7413), 0 },
+                    { 17, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7413), 0, "Organizasyondan kullanıcı çıkarma yetkisi", false, "RemoveUserFromOrganization", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7414), 0 },
+                    { 18, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7415), 0, "Organizasyon kullanıcılarını görüntüleme yetkisi", false, "ViewOrganizationUsers", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7415), 0 },
+                    { 19, new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7416), 0, "İzinleri yönetme yetkisi", false, "ManagePermissions", new DateTime(2024, 12, 17, 23, 40, 42, 589, DateTimeKind.Local).AddTicks(7416), 0 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrganizationProject_OrganizationId",
+                table: "OrganizationProject",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrganizationProjectTaskCategory_OrganizationProjectId",
+                table: "OrganizationProjectTaskCategory",
+                column: "OrganizationProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrganizationProjectTasks_OrganizationProjectId",
+                table: "OrganizationProjectTasks",
+                column: "OrganizationProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrganizationProjectTasks_OrganizationProjectTaskCategoryId",
+                table: "OrganizationProjectTasks",
+                column: "OrganizationProjectTaskCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrganizationProjectTasks_UserId",
+                table: "OrganizationProjectTasks",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrganizationRolePermissions_OrganizationRoleId",
@@ -310,23 +403,18 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_UserId",
-                table: "Tasks",
+                name: "IX_OrganizationUserRoles_OrganizationRoleId",
+                table: "OrganizationUserRoles",
+                column: "OrganizationRoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrganizationUserRoles_UserId",
+                table: "OrganizationUserRoles",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tokens_UserId",
                 table: "Tokens",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrganizationRoles_OrganizationRoleId",
-                table: "UserOrganizationRoles",
-                column: "OrganizationRoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrganizationRoles_UserId",
-                table: "UserOrganizationRoles",
                 column: "UserId");
         }
 
@@ -334,28 +422,34 @@ namespace TaskManagementSystemBackend.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "OrganizationProjectTasks");
+
+            migrationBuilder.DropTable(
+                name: "OrganizationProjectTaskUpdates");
+
+            migrationBuilder.DropTable(
                 name: "OrganizationRolePermissions");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "OrganizationUserRoles");
 
             migrationBuilder.DropTable(
-                name: "TaskUpdates");
+                name: "OrganizationUsers");
 
             migrationBuilder.DropTable(
                 name: "Tokens");
 
             migrationBuilder.DropTable(
-                name: "UserOrganizationRoles");
-
-            migrationBuilder.DropTable(
-                name: "UserOrganizations");
+                name: "OrganizationProjectTaskCategory");
 
             migrationBuilder.DropTable(
                 name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "OrganizationRoles");
+
+            migrationBuilder.DropTable(
+                name: "OrganizationProject");
 
             migrationBuilder.DropTable(
                 name: "Organizations");

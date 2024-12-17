@@ -3,7 +3,7 @@ using TaskManagementSystemBackend.DataAccess.DataTransferObjects.Task;
 
 namespace TaskManagementSystemBackend.Business.Validations
 {
-    public class CreateTaskDtoValidator : AbstractValidator<CreateTaskDto>
+    public class CreateTaskDtoValidator : AbstractValidator<CreateOrganizationProjectTaskDto>
     {
         public CreateTaskDtoValidator()
         {

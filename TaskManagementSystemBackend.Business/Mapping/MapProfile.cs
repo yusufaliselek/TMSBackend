@@ -23,14 +23,14 @@ namespace TaskManagementSystemBackend.Business.Mapping
             CreateMap<UpdateOrganizationDto, Organization>();
 
             // Task Mapping
-            CreateMap<TaskBase, TaskDto>();
-            CreateMap<CreateTaskDto, TaskBase>();
-            CreateMap<UpdateTaskDto, TaskBase>();
+            CreateMap<OrganizationProjectTask, OrganizationProjectTaskDto>();
+            CreateMap<CreateOrganizationProjectTaskDto, OrganizationProjectTask>();
+            CreateMap<UpdateOrganizationProjectTaskDto, OrganizationProjectTask>();
 
             // TaskUpdate Mapping
-            CreateMap<TaskUpdate, TaskUpdateDto>();
-            CreateMap<CreateTaskUpdateDto, TaskUpdate>();
-            CreateMap<UpdateTaskUpdateDto, TaskUpdate>();
+            CreateMap<OrganizationProjectTaskUpdate, OrganizationProjectTaskUpdateDto>();
+            CreateMap<CreateOrganizationProjectTaskUpdateDto, OrganizationProjectTaskUpdate>();
+            CreateMap<UpdateOrganizationProjectTaskUpdateDto, OrganizationProjectTaskUpdate>();
 
             CreateMap<Token, TokenDto>();
         }

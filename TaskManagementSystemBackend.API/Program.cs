@@ -58,8 +58,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ITaskService, TaskService>();
-builder.Services.AddScoped<ITaskUpdateService, TaskUpdateService>();
+builder.Services.AddScoped<IOrganizationProjectTaskService, OrganizationProjectTaskService>();
+builder.Services.AddScoped<IOrganizationProjectTaskUpdateService, OrganizationProjectTaskUpdateService>();
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));

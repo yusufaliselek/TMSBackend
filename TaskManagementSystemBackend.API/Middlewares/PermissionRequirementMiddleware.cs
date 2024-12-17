@@ -85,7 +85,7 @@ namespace TaskManagementSystemBackend.API.Middlewares
 
                     if (requiredPermissions.Any())
                     {
-                        var userOrganizationRoles = await dbContext.UserOrganizationRoles
+                        var userOrganizationRoles = await dbContext.OrganizationUserRoles
                             .Where(or => or.UserId == user.Id && or.OrganizationRole.OrganizationId == int.Parse(organizationId))
                             .ToListAsync();
                         var hasPermission = userOrganizationRoles.Any(uor => requiredPermissions.Contains(uor.OrganizationRole.Name));

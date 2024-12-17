@@ -9,11 +9,11 @@ namespace TaskManagementSystemBackend.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class OrganizationProjectTaskController : ControllerBase
     {
-        private readonly ITaskService _taskService;
+        private readonly IOrganizationProjectTaskService _taskService;
 
-        public TaskController(ITaskService taskService)
+        public OrganizationProjectTaskController(IOrganizationProjectTaskService taskService)
         {
             _taskService = taskService;
         }
@@ -51,7 +51,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [HttpPost]
         [PermissionRequirement("CreateTask")]
-        public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto createTaskDto)
+        public async Task<IActionResult> CreateTask([FromBody] CreateOrganizationProjectTaskDto createTaskDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -69,7 +69,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [HttpPut("{taskId}")]
         [PermissionRequirement("EditTask")]
-        public async Task<IActionResult> UpdateTask(int taskId, [FromBody] UpdateTaskDto updateTaskDto)
+        public async Task<IActionResult> UpdateTask(int taskId, [FromBody] UpdateOrganizationProjectTaskDto updateTaskDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

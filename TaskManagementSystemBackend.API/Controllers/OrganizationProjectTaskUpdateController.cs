@@ -8,11 +8,11 @@ namespace TaskManagementSystemBackend.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskUpdateController : ControllerBase
+    public class OrganizationProjectTaskUpdateController : ControllerBase
     {
-        private readonly ITaskUpdateService _taskUpdateService;
+        private readonly IOrganizationProjectTaskUpdateService _taskUpdateService;
 
-        public TaskUpdateController(ITaskUpdateService taskUpdateService)
+        public OrganizationProjectTaskUpdateController(IOrganizationProjectTaskUpdateService taskUpdateService)
         {
             _taskUpdateService = taskUpdateService;
         }
@@ -50,7 +50,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTaskUpdate([FromBody] CreateTaskUpdateDto createTaskUpdateDto)
+        public async Task<IActionResult> CreateTaskUpdate([FromBody] CreateOrganizationProjectTaskUpdateDto createTaskUpdateDto)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTaskUpdate(int id, [FromBody] UpdateTaskUpdateDto updateTaskUpdateDto)
+        public async Task<IActionResult> UpdateTaskUpdate(int id, [FromBody] UpdateOrganizationProjectTaskUpdateDto updateTaskUpdateDto)
         {
             try
             {

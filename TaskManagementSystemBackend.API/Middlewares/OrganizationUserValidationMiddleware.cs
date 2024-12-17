@@ -61,7 +61,7 @@ namespace TaskManagementSystemBackend.API.Middlewares
                     }
 
                     var userId = int.Parse(userIdClaim);
-                    var isUserInOrganization = await dbContext.UserOrganizations.AnyAsync(uo => uo.UserId == userId && uo.OrganizationId == int.Parse(organizationId));
+                    var isUserInOrganization = await dbContext.OrganizationUsers.AnyAsync(uo => uo.UserId == userId && uo.OrganizationId == int.Parse(organizationId));
                     var isUserAdminInOrganization = await dbContext.Organizations.AnyAsync(o => o.Id == int.Parse(organizationId) && o.OwnerId == userId);
 
                     if (!isUserInOrganization && !isUserAdminInOrganization)

@@ -4,7 +4,7 @@ using TaskManagementSystemBackend.DataAccess.DataTransferObjects.UserOrganizatio
 
 namespace TaskManagementSystemBackend.Business.Services
 {
-    public interface IUserOrganizationRoleService
+    public interface IOrganizationUserRoleService
     {
         Task AssignUserToRoleAsync(AssignUserToOrganizationRoleDto assignDto);
         Task RemoveUserFromRoleAsync(RemoveUserFromOrganizationRoleDto removeDto);
