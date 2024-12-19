@@ -35,8 +35,8 @@ namespace TaskManagementSystemBackend.API.Middlewares
                     await context.Response.WriteAsJsonAsync(new { message = "Organization-Id header is missing." });
                     return;
                 }
-                var userId = context.Items["UserId"] as int?;
-                if (!userId.HasValue)
+                var userId = context.Items["UserId"] as string;
+                if (string.IsNullOrEmpty(userId))
                 {
                     context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                     await context.Response.WriteAsJsonAsync(new { message = "User ID is missing." });
@@ -46,8 +46,8 @@ namespace TaskManagementSystemBackend.API.Middlewares
                 using var scope = _serviceScopeFactory.CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-                var isUserInOrganization = await dbContext.OrganizationUsers.AnyAsync(uo => uo.UserId == userId && uo.OrganizationId == int.Parse(organizationId));
-                var isUserAdminInOrganization = await dbContext.Organizations.AnyAsync(o => o.Id == int.Parse(organizationId) && o.OwnerId == userId);
+                var isUserInOrganization = await dbContext.OrganizationUsers.AnyAsync(uo => uo.UserId == userId && uo.OrganizationId == organizationId);
+                var isUserAdminInOrganization = await dbContext.Organizations.AnyAsync(o => o.Id == organizationId && o.OwnerId == userId);
 
                 if (!isUserInOrganization && !isUserAdminInOrganization)
                 {

@@ -18,7 +18,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTaskUpdate(int id)
+        public async Task<IActionResult> GetTaskUpdate(string id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTaskUpdate(int id, [FromBody] UpdateOrganizationProjectTaskUpdateDto updateTaskUpdateDto)
+        public async Task<IActionResult> UpdateTaskUpdate(string id, [FromBody] UpdateOrganizationProjectTaskUpdateDto updateTaskUpdateDto)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTaskUpdate(int id)
+        public async Task<IActionResult> DeleteTaskUpdate(string id)
         {
             try
             {

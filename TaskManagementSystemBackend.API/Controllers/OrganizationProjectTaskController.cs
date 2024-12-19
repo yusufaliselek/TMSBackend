@@ -19,7 +19,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         }
 
         [HttpGet("{taskId}")]
-        public async Task<IActionResult> GetTaskById(int taskId)
+        public async Task<IActionResult> GetTaskById(string taskId)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [HttpPut("{taskId}")]
         [PermissionRequirement("EditTask")]
-        public async Task<IActionResult> UpdateTask(int taskId, [FromBody] UpdateOrganizationProjectTaskDto updateTaskDto)
+        public async Task<IActionResult> UpdateTask(string taskId, [FromBody] UpdateOrganizationProjectTaskDto updateTaskDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -90,7 +90,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [HttpDelete("{taskId}")]
         [PermissionRequirement("DeleteTask")]
-        public async Task<IActionResult> DeleteTask(int taskId)
+        public async Task<IActionResult> DeleteTask(string taskId)
         {
             try
             {

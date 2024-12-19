@@ -6,7 +6,7 @@ namespace TaskManagementSystemBackend.DataAccess.IServices
     public interface ITokenService
     {
         TokenDto GenerateToken(User user);
-        int GetUserIdFromToken(string token);
+        string GetUserIdFromToken(string token);
     }
 
 }

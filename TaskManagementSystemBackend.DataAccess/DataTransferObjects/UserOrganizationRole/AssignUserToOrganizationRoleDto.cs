@@ -2,7 +2,7 @@
 {
     public class AssignUserToOrganizationRoleDto
     {
-        public int UserId { get; set; } // Kullanıcı ID'si
-        public int OrganizationRoleId { get; set; } // Organizasyon Rol ID'si
+        public string UserId { get; set; } // Kullanıcı ID'si
+        public string OrganizationRoleId { get; set; } // Organizasyon Rol ID'si
     }
 }

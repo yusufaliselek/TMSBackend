@@ -18,7 +18,7 @@ namespace TaskManagementSystemBackend.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<OrganizationProjectTaskDto> GetTaskByIdAsync(int taskId)
+        public async Task<OrganizationProjectTaskDto> GetTaskByIdAsync(string taskId)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<OrganizationProjectTaskDto> UpdateTaskAsync(int taskId, UpdateOrganizationProjectTaskDto updateTaskDto)
+        public async Task<OrganizationProjectTaskDto> UpdateTaskAsync(string taskId, UpdateOrganizationProjectTaskDto updateTaskDto)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<bool> DeleteTaskAsync(int taskId)
+        public async Task<bool> DeleteTaskAsync(string taskId)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public Task<IEnumerable<OrganizationProjectTaskDto>> GetTasksByUserIdAsync(int userId)
+        public Task<IEnumerable<OrganizationProjectTaskDto>> GetTasksByUserIdAsync(string userId)
         {
             throw new NotImplementedException();
         }

@@ -31,8 +31,8 @@ namespace TaskManagementSystemBackend.API.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetUserById(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(string id)
         {
             try
             {
@@ -48,8 +48,8 @@ namespace TaskManagementSystemBackend.API.Controllers
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDto updateUserDto)
         {
             try
             {
@@ -68,8 +68,8 @@ namespace TaskManagementSystemBackend.API.Controllers
             }
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
         {
             try
             {

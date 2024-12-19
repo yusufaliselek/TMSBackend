@@ -7,7 +7,7 @@
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiration { get; set; }
         public DateTime? RefreshedAt { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
     }
 

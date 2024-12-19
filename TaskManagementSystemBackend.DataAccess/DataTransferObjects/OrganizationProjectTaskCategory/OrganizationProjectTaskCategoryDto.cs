@@ -3,9 +3,10 @@ namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.Organizatio
 {
     public class OrganizationProjectTaskCategoryDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int ColumnNumber { get; set; }
-        public int OrganizationProjectId { get; set; }
+        public string OrganizationProjectId { get; set; }
     }
 }

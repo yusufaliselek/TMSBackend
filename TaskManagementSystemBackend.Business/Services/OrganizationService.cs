@@ -22,7 +22,7 @@ namespace TaskManagementSystemBackend.Business.Services
             _tokenService = tokenService;
         }
 
-        public async Task<OrganizationDto> GetOrganizationByIdAsync(int organizationId)
+        public async Task<OrganizationDto> GetOrganizationByIdAsync(string organizationId)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<OrganizationDto> UpdateOrganizationAsync(int organizationId, UpdateOrganizationDto updateOrganizationDto)
+        public async Task<OrganizationDto> UpdateOrganizationAsync(string organizationId, UpdateOrganizationDto updateOrganizationDto)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<bool> DeleteOrganizationAsync(int organizationId)
+        public async Task<bool> DeleteOrganizationAsync(string organizationId)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsersByOrganizationIdAsync(int organizationId)
+        public async Task<IEnumerable<UserDto>> GetUsersByOrganizationIdAsync(string organizationId)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<UserDto> GetOwnerByOrganizationIdAsync(int organizationId)
+        public async Task<UserDto> GetOwnerByOrganizationIdAsync(string organizationId)
         {
             try
             {
@@ -147,7 +147,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<OrganizationRoleDto> GetOrganizationRolesByOrganizationIdAsync(int organizationId)
+        public async Task<OrganizationRoleDto> GetOrganizationRolesByOrganizationIdAsync(string organizationId)
         {
             try
             {
@@ -163,7 +163,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task AddUserToOrganizationAsync(int organizationId, int userId)
+        public async Task AddUserToOrganizationAsync(string organizationId, string userId)
         {
             try
             {
@@ -193,7 +193,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task RemoveUserFromOrganizationAsync(int organizationId, int userId)
+        public async Task RemoveUserFromOrganizationAsync(string organizationId, string userId)
         {
             try
             {

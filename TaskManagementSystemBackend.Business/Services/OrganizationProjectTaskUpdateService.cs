@@ -18,7 +18,7 @@ namespace TaskManagementSystemBackend.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<OrganizationProjectTaskUpdateDto> GetTaskUpdateByIdAsync(int taskUpdateId)
+        public async Task<OrganizationProjectTaskUpdateDto> GetTaskUpdateByIdAsync(string taskUpdateId)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<OrganizationProjectTaskUpdateDto> UpdateTaskUpdateAsync(int taskUpdateId, UpdateOrganizationProjectTaskUpdateDto updateTaskUpdateDto)
+        public async Task<OrganizationProjectTaskUpdateDto> UpdateTaskUpdateAsync(string taskUpdateId, UpdateOrganizationProjectTaskUpdateDto updateTaskUpdateDto)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<bool> DeleteTaskUpdateAsync(int taskUpdateId)
+        public async Task<bool> DeleteTaskUpdateAsync(string taskUpdateId)
         {
             try
             {

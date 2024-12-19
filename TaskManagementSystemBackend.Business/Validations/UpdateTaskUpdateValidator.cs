@@ -13,7 +13,7 @@ namespace TaskManagementSystemBackend.Business.Validations
         public UpdateTaskUpdateDtoValidator()
         {
             RuleFor(x => x.TaskId)
-                .GreaterThan(0).WithMessage("Geçerli bir görev ID'si girilmelidir.");
+                .NotEmpty().WithMessage("Geçerli bir görev ID'si girilmelidir.");
 
             RuleFor(x => x.OldStatus)
                 .IsInEnum().WithMessage("Geçerli bir eski durum seçilmelidir.");

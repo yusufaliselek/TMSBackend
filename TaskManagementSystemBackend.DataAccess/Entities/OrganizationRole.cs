@@ -8,7 +8,7 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
 {
     public class OrganizationRole: Base
     {
-        public int OrganizationId { get; set; }
+        public string OrganizationId { get; set; }
         public string Name { get; set; }
 
         public Organization Organization { get; set; }

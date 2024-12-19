@@ -5,9 +5,9 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
     public class OrganizationUser : Base
     {
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
-        public int OrganizationId { get; set; }
+        public string OrganizationId { get; set; }
     }
 }

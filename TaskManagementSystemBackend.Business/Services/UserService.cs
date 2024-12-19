@@ -19,15 +19,15 @@ namespace TaskManagementSystemBackend.Business.Services
             _mapper = mapper;
         }
 
-        private bool IsTokenUserVerify(int userId, string token)
+        private bool IsTokenUserVerify(string userId, string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             if (jwtToken == null) return false;
-            return int.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value) == userId;
+            return jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value == userId;
         }
 
-        public async Task<UserDto> GetUserByIdAsync(int userId)
+        public async Task<UserDto> GetUserByIdAsync(string userId)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<UserDto> UpdateUserAsync(int userId, UpdateUserDto updateUserDto, string token)
+        public async Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto updateUserDto, string token)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<bool> DeleteUserAsync(int userId, string token)
+        public async Task<bool> DeleteUserAsync(string userId, string token)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace TaskManagementSystemBackend.Business.Services
             }
         }
 
-        public async Task<IEnumerable<OrganizationDto>> GetOrganizationsByUserIdAsync(int userId)
+        public async Task<IEnumerable<OrganizationDto>> GetOrganizationsByUserIdAsync(string userId)
         {
             try
             {

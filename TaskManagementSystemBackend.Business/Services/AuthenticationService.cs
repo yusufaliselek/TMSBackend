@@ -139,21 +139,17 @@ namespace TaskManagementSystemBackend.Business.Services
         {
             try
             {
-                // Refresh token doğruluğunu kontrol et
                 var token = await _context.Tokens.FirstOrDefaultAsync(t => t.RefreshToken == refreshToken && t.IsDeleted == false);
                 if (token == null || token.RefreshTokenExpiration <= DateTime.Now)
                 {
                     throw new UnauthorizedAccessException("Geçersiz veya süresi dolmuş refresh token!");
                 }
 
-                // Kullanıcıyı al
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == token.UserId);
                 if (user == null) throw new UnauthorizedAccessException("Kullanıcı bulunamadı!");
 
-                // Yeni token üret
                 var newToken = _tokenService.GenerateToken(user);
 
-                // Eski refresh token'ı güncelle
                 token.RefreshToken = newToken.RefreshToken;
                 token.RefreshTokenExpiration = newToken.RefreshTokenExpiration;
                 token.AccessToken = newToken.AccessToken;
@@ -167,12 +163,10 @@ namespace TaskManagementSystemBackend.Business.Services
             }
             catch (UnauthorizedAccessException ex)
             {
-                // Hata durumunda UnauthorizedAccessException fırlatıyoruz
                 throw new UnauthorizedAccessException(ex.Message);
             }
             catch (Exception ex)
             {
-                // Diğer hata durumları için genel exception
                 throw new Exception("Bir hata oluştu: " + ex.Message);
             }
         }

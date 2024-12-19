@@ -23,13 +23,13 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
         public int RowNumber { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         public User User { get; set; }
 
         [Required]
-        public int OrganizationProjectTaskCategoryId { get; set; }
+        public string OrganizationProjectTaskCategoryId { get; set; }
 
         [Required]
         public OrganizationProjectTaskCategory OrganizationProjectTaskCategory { get; set; }

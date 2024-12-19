@@ -34,7 +34,7 @@ namespace TaskManagementSystemBackend.Business.Services
         {
             var userList = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -75,13 +75,12 @@ namespace TaskManagementSystemBackend.Business.Services
             return tokenDto;
         }
 
-        public int GetUserIdFromToken(string token)
+        public string GetUserIdFromToken(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             if (jwtToken == null) throw new SecurityTokenException("Token geçersiz.");
-            return int.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value);
-
+            return jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
         }
     }
 }

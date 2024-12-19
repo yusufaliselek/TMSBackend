@@ -6,16 +6,16 @@ namespace TaskManagementSystemBackend.DataAccess.IServices
 {
     public interface IOrganizationService
     {
-        Task<OrganizationDto> GetOrganizationByIdAsync(int organizationId);
+        Task<OrganizationDto> GetOrganizationByIdAsync(string organizationId);
         Task<IEnumerable<OrganizationDto>> GetAllOrganizationsAsync();
         Task<OrganizationDto> CreateOrganizationAsync(CreateOrganizationDto organizationDto, string token);
-        Task<OrganizationDto> UpdateOrganizationAsync(int organizationId, UpdateOrganizationDto updateOrganizationDto);
-        Task<bool> DeleteOrganizationAsync(int organizationId);
-        Task<IEnumerable<UserDto>> GetUsersByOrganizationIdAsync(int organizationId);
-        Task<UserDto> GetOwnerByOrganizationIdAsync(int organizationId);
-        Task<OrganizationRoleDto> GetOrganizationRolesByOrganizationIdAsync(int organizationId);
-        Task AddUserToOrganizationAsync(int organizationId, int userId);
-        Task RemoveUserFromOrganizationAsync(int organizationId, int userId);
+        Task<OrganizationDto> UpdateOrganizationAsync(string organizationId, UpdateOrganizationDto updateOrganizationDto);
+        Task<bool> DeleteOrganizationAsync(string organizationId);
+        Task<IEnumerable<UserDto>> GetUsersByOrganizationIdAsync(string organizationId);
+        Task<UserDto> GetOwnerByOrganizationIdAsync(string organizationId);
+        Task<OrganizationRoleDto> GetOrganizationRolesByOrganizationIdAsync(string organizationId);
+        Task AddUserToOrganizationAsync(string organizationId, string userId);
+        Task RemoveUserFromOrganizationAsync(string organizationId, string userId);
     }
 
 }

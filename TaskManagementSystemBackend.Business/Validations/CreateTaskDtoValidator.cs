@@ -21,8 +21,7 @@ namespace TaskManagementSystemBackend.Business.Validations
             RuleFor(x => x.Status)
                 .IsInEnum().WithMessage("Geçerli bir durum seçilmelidir.");
 
-            RuleFor(x => x.UserId)
-                .GreaterThan(0).WithMessage("Geçerli bir kullanıcı ID'si girilmelidir.");
+            RuleFor(x => x.UserId).NotEmpty().WithMessage("Geçerli bir kullanıcı ID'si girilmelidir.");
         }
     }
 }

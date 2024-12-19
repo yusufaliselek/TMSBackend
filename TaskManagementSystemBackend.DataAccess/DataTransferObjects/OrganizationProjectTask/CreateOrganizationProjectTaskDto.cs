@@ -9,7 +9,7 @@ namespace TaskManagementSystemBackend.DataAccess.DataTransferObjects.Task
         public DateTime? DueDate { get; set; }
         public OrganizationProjectTaskStatus Status { get; set; }
         public OrganizationProjectTaskPriority Priority { get; set; }
-        public int OrganizationProjectTaskCategoryId { get; set; }
-        public int UserId { get; set; }
+        public string OrganizationProjectTaskCategoryId { get; set; }
+        public string UserId { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [OrganizationUserValidation]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(string id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         [HttpPut("{id}")]
         [OrganizationUserValidation]
         [PermissionRequirement("EditOrganization")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateOrganizationDto updateOrganizationDto)
+        public async Task<IActionResult> Update(string id, [FromBody] UpdateOrganizationDto updateOrganizationDto)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         [HttpDelete("{id}")]
         [OrganizationUserValidation]
         [PermissionRequirement("DeleteOrganization")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         [HttpGet("{id}/users")]
         [OrganizationUserValidation]
         [PermissionRequirement("ViewOrganizationUsers")]
-        public async Task<IActionResult> GetUsersByOrganizationId(int id)
+        public async Task<IActionResult> GetUsersByOrganizationId(string id)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [HttpGet("{id}/owner")]
         [OrganizationUserValidation]
-        public async Task<IActionResult> GetOwnerByOrganizationId(int id)
+        public async Task<IActionResult> GetOwnerByOrganizationId(string id)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace TaskManagementSystemBackend.API.Controllers
 
         [HttpGet("{id}/roles")]
         [OrganizationUserValidation]
-        public async Task<IActionResult> GetRolesByOrganizationId(int id)
+        public async Task<IActionResult> GetRolesByOrganizationId(string id)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         [HttpPost("{id}/users/{userId}")]
         [OrganizationUserValidation]
         [PermissionRequirement("AddUserToOrganization")]
-        public async Task<IActionResult> AddUserToOrganization(int id, int userId)
+        public async Task<IActionResult> AddUserToOrganization(string id, string userId)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace TaskManagementSystemBackend.API.Controllers
         [HttpDelete("{id}/users/{userId}")]
         [OrganizationUserValidation]
         [PermissionRequirement("RemoveUserFromOrganization")]
-        public async Task<IActionResult> RemoveUserFromOrganization(int id, int userId)
+        public async Task<IActionResult> RemoveUserFromOrganization(string id, string userId)
         {
             try
             {

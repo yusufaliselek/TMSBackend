@@ -10,7 +10,7 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int OrganizationId { get; set; }
+        public string OrganizationId { get; set; }
         public Organization Organization { get; set; }
         public ICollection<OrganizationProjectTaskCategory> OrganizationProjectTaskCategories { get; set; }
         public ICollection<OrganizationProjectTask> OrganizationProjectTasks { get; set; }

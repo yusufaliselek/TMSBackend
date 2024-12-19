@@ -12,7 +12,7 @@ namespace TaskManagementSystemBackend.DataAccess.Entities
         public string Description { get; set; }
 
         [Required]
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public ICollection<OrganizationRole> Roles { get; set; }
     }
 }
